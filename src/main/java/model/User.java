@@ -1,12 +1,11 @@
-package org.example.model;
+package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,9 +13,13 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String role;
 
-    // Getters and setters
+    @ElementCollection
+    private List<String> preferredDates;  // Дати для вибору
+    @ElementCollection
+    private List<String> blockedDates;    // Блоковані дати
+
+    // Геттери і сеттери
     public Long getId() {
         return id;
     }
@@ -49,11 +52,19 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public List<String> getPreferredDates() {
+        return preferredDates;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPreferredDates(List<String> preferredDates) {
+        this.preferredDates = preferredDates;
+    }
+
+    public List<String> getBlockedDates() {
+        return blockedDates;
+    }
+
+    public void setBlockedDates(List<String> blockedDates) {
+        this.blockedDates = blockedDates;
     }
 }
